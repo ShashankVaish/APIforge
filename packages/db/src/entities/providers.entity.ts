@@ -1,17 +1,18 @@
 import { Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { ModelProviderMapping } from "./model-provider-mapping.entity";
+
 @Entity()
-export class Models{
+export class Providers{
     @PrimaryGeneratedColumn()
     // @JoinColumn()
     id:number
     @Column()
     name:string
     @Column()
-    companyId:string
-    @OneToMany(()=>ModelProviderMapping,(mapping)=>mapping.modelId)
+    website:string
+    @OneToMany(()=>ModelProviderMapping,(mapping)=>mapping.providerId)
     mappings:ModelProviderMapping[]
-    
+
 
 
 }

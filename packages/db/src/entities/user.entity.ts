@@ -1,22 +1,30 @@
     
-import decorators, { Column, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
+import  { Column, CreateDateColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Entity } from 'typeorm';
+import { ApiKeys } from './api-key.entity';
+import { Credits } from './credits.entity';
 @Entity()
 export class User{
     @PrimaryGeneratedColumn()
-    Id:Number
+    id:number
 
     @Column()
-    Name:String
+    name:string
 
     @Column({unique:true})
-    Email:String
+    email:string
 
     @Column({unique:true})
-    Password:String
+    password:string
 
     @CreateDateColumn()
-    CreatedIn:Date
+    createdIn:Date
+    
+    @OneToMany(()=>ApiKeys,(apikey)=>apikey.UserId)
+    apiKeys!:ApiKeys[]
+    @OneToOne(() => Credits, (credits) => credits.userId)
+    credits!: Credits
+
 
 
 }

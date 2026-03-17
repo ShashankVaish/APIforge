@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Decorator } from "typescript";
 import { User } from "./user.entity";
+import { Conversations } from "./conversation.entity";
 @Entity()
 
 export class ApiKeys{
@@ -14,5 +15,7 @@ export class ApiKeys{
     apikey!:string
     
     @Column()
-    isDisabled:boolean
+    isDisabled!:boolean
+    @OneToMany(()=>Conversations,(conversation)=>conversation.apiKeyId)
+    conversation:Conversations[]
 }

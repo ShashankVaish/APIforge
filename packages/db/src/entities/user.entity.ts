@@ -3,6 +3,8 @@ import  { Column, CreateDateColumn, OneToMany, OneToOne, PrimaryGeneratedColumn 
 import { Entity } from 'typeorm';
 import { ApiKeys } from './api-key.entity';
 import { Credits } from './credits.entity';
+import { OnRampTransaction } from './onramp-transaction.entity';
+import { Conversations } from './conversation.entity';
 @Entity()
 export class User{
     @PrimaryGeneratedColumn()
@@ -24,6 +26,10 @@ export class User{
     apiKeys!:ApiKeys[]
     @OneToOne(() => Credits, (credits) => credits.userId)
     credits!: Credits
+    @OneToMany(()=>OnRampTransaction,(transaction)=>transaction.userId)
+    transaction:User[]
+    @OneToMany(()=>Conversations,(conversation)=>conversation.userId)
+    conversations:Conversations
 
 
 
